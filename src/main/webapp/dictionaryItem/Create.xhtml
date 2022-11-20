@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DictionaryItemCreateDlg" widgetVar="DictionaryItemCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDictionaryItemTitle}">
+            <h:form id="DictionaryItemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dictionaryItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDictionaryItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{dictionaryItemController.selected.id}" title="#{bundle.CreateDictionaryItemTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateDictionaryItemLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{dictionaryItemController.selected.name}" title="#{bundle.CreateDictionaryItemTitle_name}" />
+                        <p:outputLabel value="#{bundle.CreateDictionaryItemLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{dictionaryItemController.selected.code}" title="#{bundle.CreateDictionaryItemTitle_code}" />
+                        <p:outputLabel value="#{bundle.CreateDictionaryItemLabel_comments}" for="comments" />
+                        <p:inputTextarea rows="4" cols="30" id="comments" value="#{dictionaryItemController.selected.comments}" title="#{bundle.CreateDictionaryItemTitle_comments}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{dictionaryItemController.create}" value="#{bundle.Save}" update="display,:DictionaryItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'DictionaryItemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DictionaryItemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

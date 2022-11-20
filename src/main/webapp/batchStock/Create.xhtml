@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BatchStockCreateDlg" widgetVar="BatchStockCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateBatchStockTitle}">
+            <h:form id="BatchStockCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{batchStockController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateBatchStockLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{batchStockController.selected.id}" title="#{bundle.CreateBatchStockTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateBatchStockLabel_itemBatch}" for="itemBatch" />
+                        <p:selectOneMenu id="itemBatch" value="#{batchStockController.selected.itemBatch}" >
+                            <f:selectItems value="#{itemBatchController.itemsAvailableSelectOne}"
+                                           var="itemBatchItem"
+                                           itemValue="#{itemBatchItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateBatchStockLabel_institution}" for="institution" />
+                        <p:selectOneMenu id="institution" value="#{batchStockController.selected.institution}" >
+                            <f:selectItems value="#{institutionController.itemsAvailableSelectOne}"
+                                           var="institutionItem"
+                                           itemValue="#{institutionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateBatchStockLabel_stock}" for="stock" />
+                        <p:inputText id="stock" value="#{batchStockController.selected.stock}" title="#{bundle.CreateBatchStockTitle_stock}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{batchStockController.create}" value="#{bundle.Save}" update="display,:BatchStockListForm:datalist,:growl" oncomplete="handleSubmit(args,'BatchStockCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BatchStockCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

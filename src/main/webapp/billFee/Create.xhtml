@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BillFeeCreateDlg" widgetVar="BillFeeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateBillFeeTitle}">
+            <h:form id="BillFeeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{billFeeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateBillFeeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{billFeeController.selected.id}" title="#{bundle.CreateBillFeeTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateBillFeeLabel_bill}" for="bill" />
+                        <p:inputText id="bill" value="#{billFeeController.selected.bill}" title="#{bundle.CreateBillFeeTitle_bill}" />
+                        <p:outputLabel value="#{bundle.CreateBillFeeLabel_billItem}" for="billItem" />
+                        <p:inputText id="billItem" value="#{billFeeController.selected.billItem}" title="#{bundle.CreateBillFeeTitle_billItem}" />
+                        <p:outputLabel value="#{bundle.CreateBillFeeLabel_feeValue}" for="feeValue" />
+                        <p:inputText id="feeValue" value="#{billFeeController.selected.feeValue}" title="#{bundle.CreateBillFeeTitle_feeValue}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{billFeeController.create}" value="#{bundle.Save}" update="display,:BillFeeListForm:datalist,:growl" oncomplete="handleSubmit(args,'BillFeeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BillFeeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

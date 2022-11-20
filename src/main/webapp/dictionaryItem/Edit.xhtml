@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DictionaryItemEditDlg" widgetVar="DictionaryItemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDictionaryItemTitle}">
+            <h:form id="DictionaryItemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dictionaryItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDictionaryItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{dictionaryItemController.selected.id}" title="#{bundle.EditDictionaryItemTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditDictionaryItemLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{dictionaryItemController.selected.name}" title="#{bundle.EditDictionaryItemTitle_name}" />
+                        <p:outputLabel value="#{bundle.EditDictionaryItemLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{dictionaryItemController.selected.code}" title="#{bundle.EditDictionaryItemTitle_code}" />
+                        <p:outputLabel value="#{bundle.EditDictionaryItemLabel_comments}" for="comments" />
+                        <p:inputTextarea rows="4" cols="30" id="comments" value="#{dictionaryItemController.selected.comments}" title="#{bundle.EditDictionaryItemTitle_comments}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{dictionaryItemController.update}" value="#{bundle.Save}" update="display,:DictionaryItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DictionaryItemEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DictionaryItemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

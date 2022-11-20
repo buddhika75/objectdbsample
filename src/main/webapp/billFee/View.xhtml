@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BillFeeViewDlg" widgetVar="BillFeeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewBillFeeTitle}">
+            <h:form id="BillFeeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{billFeeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewBillFeeLabel_id}"/>
+                        <h:outputText value="#{billFeeController.selected.id}" title="#{bundle.ViewBillFeeTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewBillFeeLabel_bill}"/>
+                        <h:outputText value="#{billFeeController.selected.bill}" title="#{bundle.ViewBillFeeTitle_bill}"/>
+                        <h:outputText value="#{bundle.ViewBillFeeLabel_billItem}"/>
+                        <h:outputText value="#{billFeeController.selected.billItem}" title="#{bundle.ViewBillFeeTitle_billItem}"/>
+                        <h:outputText value="#{bundle.ViewBillFeeLabel_feeValue}"/>
+                        <h:outputText value="#{billFeeController.selected.feeValue}" title="#{bundle.ViewBillFeeTitle_feeValue}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="BillFeeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

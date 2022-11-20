@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BillItemEditDlg" widgetVar="BillItemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBillItemTitle}">
+            <h:form id="BillItemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{billItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBillItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{billItemController.selected.id}" title="#{bundle.EditBillItemTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditBillItemLabel_bill}" for="bill" />
+                        <p:inputText id="bill" value="#{billItemController.selected.bill}" title="#{bundle.EditBillItemTitle_bill}" />
+                        <p:outputLabel value="#{bundle.EditBillItemLabel_item}" for="item" />
+                        <p:inputText id="item" value="#{billItemController.selected.item}" title="#{bundle.EditBillItemTitle_item}" />
+                        <p:outputLabel value="#{bundle.EditBillItemLabel_qty}" for="qty" />
+                        <p:inputText id="qty" value="#{billItemController.selected.qty}" title="#{bundle.EditBillItemTitle_qty}" />
+                        <p:outputLabel value="#{bundle.EditBillItemLabel_rate}" for="rate" />
+                        <p:inputText id="rate" value="#{billItemController.selected.rate}" title="#{bundle.EditBillItemTitle_rate}" />
+                        <p:outputLabel value="#{bundle.EditBillItemLabel_value}" for="value" />
+                        <p:inputText id="value" value="#{billItemController.selected.value}" title="#{bundle.EditBillItemTitle_value}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{billItemController.update}" value="#{bundle.Save}" update="display,:BillItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BillItemEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BillItemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

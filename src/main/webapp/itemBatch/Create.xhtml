@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemBatchCreateDlg" widgetVar="ItemBatchCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateItemBatchTitle}">
+            <h:form id="ItemBatchCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemBatchController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateItemBatchLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{itemBatchController.selected.id}" title="#{bundle.CreateItemBatchTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateItemBatchLabel_item}" for="item" />
+                        <p:selectOneMenu id="item" value="#{itemBatchController.selected.item}" >
+                            <f:selectItems value="#{itemController.itemsAvailableSelectOne}"
+                                           var="itemItem"
+                                           itemValue="#{itemItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateItemBatchLabel_doe}" for="doe" />
+                        <p:calendar id="doe" pattern="MM/dd/yyyy" value="#{itemBatchController.selected.doe}" title="#{bundle.EditItemBatchTitle_doe}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateItemBatchLabel_batchNo}" for="batchNo" />
+                        <p:inputText id="batchNo" value="#{itemBatchController.selected.batchNo}" title="#{bundle.CreateItemBatchTitle_batchNo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemBatchController.create}" value="#{bundle.Save}" update="display,:ItemBatchListForm:datalist,:growl" oncomplete="handleSubmit(args,'ItemBatchCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemBatchCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

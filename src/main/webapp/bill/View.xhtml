@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BillViewDlg" widgetVar="BillViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewBillTitle}">
+            <h:form id="BillViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{billController.selected != null}">
+                        <h:outputText value="#{bundle.ViewBillLabel_id}"/>
+                        <h:outputText value="#{billController.selected.id}" title="#{bundle.ViewBillTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewBillLabel_customer}"/>
+                        <h:outputText value="#{billController.selected.customer}" title="#{bundle.ViewBillTitle_customer}"/>
+                        <h:outputText value="#{bundle.ViewBillLabel_user}"/>
+                        <h:outputText value="#{billController.selected.user}" title="#{bundle.ViewBillTitle_user}"/>
+                        <h:outputText value="#{bundle.ViewBillLabel_institution}"/>
+                        <h:outputText value="#{billController.selected.institution}" title="#{bundle.ViewBillTitle_institution}"/>
+                        <h:outputText value="#{bundle.ViewBillLabel_total}"/>
+                        <h:outputText value="#{billController.selected.total}" title="#{bundle.ViewBillTitle_total}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="BillViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

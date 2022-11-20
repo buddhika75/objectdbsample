@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BillCreateDlg" widgetVar="BillCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateBillTitle}">
+            <h:form id="BillCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{billController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateBillLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{billController.selected.id}" title="#{bundle.CreateBillTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateBillLabel_customer}" for="customer" />
+                        <p:selectOneMenu id="customer" value="#{billController.selected.customer}" >
+                            <f:selectItems value="#{personController.itemsAvailableSelectOne}"
+                                           var="customerItem"
+                                           itemValue="#{customerItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateBillLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{billController.selected.user}" >
+                            <f:selectItems value="#{personController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateBillLabel_institution}" for="institution" />
+                        <p:selectOneMenu id="institution" value="#{billController.selected.institution}" >
+                            <f:selectItems value="#{institutionController.itemsAvailableSelectOne}"
+                                           var="institutionItem"
+                                           itemValue="#{institutionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateBillLabel_total}" for="total" />
+                        <p:inputText id="total" value="#{billController.selected.total}" title="#{bundle.CreateBillTitle_total}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{billController.create}" value="#{bundle.Save}" update="display,:BillListForm:datalist,:growl" oncomplete="handleSubmit(args,'BillCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BillCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
